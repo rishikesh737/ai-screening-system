@@ -5,8 +5,9 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "PGAGI Screening System",
-  description: "AI-Powered Candidate Screening System",
+  title: "PGAGI AI Screener",
+  description: "AI-powered technical interview screening system",
+  icons: { icon: '/favicon.svg' },
 };
 
 export default function RootLayout({
@@ -16,7 +17,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.className} bg-slate-950 text-slate-100`}>{children}</body>
+      <body className={`${inter.className} bg-gradient-to-br from-[#FDFBF7] to-[#F0EBE1] text-stone-900`}>{children}</body>
     </html>
   );
 }

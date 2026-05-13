@@ -15,9 +15,10 @@ interface InterviewState {
   setCurrentQuestion: (q: Question) => void;
   incrementQuestionsAnswered: () => void;
   setStatus: (status: 'idle' | 'uploading' | 'interviewing' | 'completed') => void;
+  reset: () => void;
 }
 
-export const useInterviewStore = create<InterviewState>((set) => ({
+const initialState = {
   sessionId: null,
   role: null,
   candidateName: null,
@@ -25,12 +26,17 @@ export const useInterviewStore = create<InterviewState>((set) => ({
   currentQuestion: null,
   questionsAnswered: 0,
   totalQuestions: 8,
-  status: 'idle',
+  status: 'idle' as const,
+};
+
+export const useInterviewStore = create<InterviewState>((set) => ({
+  ...initialState,
   
   setSession: (sessionId, role, candidateName, skills) => set({
     sessionId, role, candidateName, extractedSkills: skills
   }),
   setCurrentQuestion: (q) => set({ currentQuestion: q }),
   incrementQuestionsAnswered: () => set((state) => ({ questionsAnswered: state.questionsAnswered + 1 })),
-  setStatus: (status) => set({ status })
+  setStatus: (status) => set({ status }),
+  reset: () => set(initialState)
 }));
